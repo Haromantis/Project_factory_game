@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Factory — From Cell to Soul</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ===== MAIN MENU ===== -->
+    <div id="main-menu">
+        <div id="menu-content">
+            <h1 id="menu-title">BLOOD FACTORY</h1>
+            <p id="menu-subtitle">From Cell to Soul</p>
+            <div id="menu-buttons">
+                <button id="btn-new-world" class="menu-btn">New World</button>
+                <button id="btn-load-world" class="menu-btn" title="Load saved world">Load World</button>
+                <button id="btn-settings" class="menu-btn">Settings</button>
+                <button id="btn-quit-game" class="menu-btn" style="margin-top:16px;color:#c06060;">Quit to Desktop</button>
+            </div>
+        </div>
+        <div id="menu-bg"></div>
+    </div>
+
+    <!-- ===== WORLD MANAGEMENT ===== -->
+    <div id="world-modal" class="hidden">
+        <div id="world-modal-content">
+            <h2 id="world-modal-title">Saved Worlds</h2>
+            <div id="world-list"></div>
+            <div id="world-actions">
+                <div id="world-create">
+                    <input type="text" id="new-world-name" placeholder="World name..." maxlength="40">
+                    <button id="btn-create-world" class="menu-btn">Create New World</button>
+                </div>
+                <div id="world-import-export">
+                    <button id="btn-import-world" class="menu-btn">Import World</button>
+                    <button id="btn-export-all" class="menu-btn">Export All Worlds</button>
+                </div>
+            </div>
+            <input type="file" id="import-file-input" accept=".json" style="display:none">
+            <button id="btn-world-back" class="menu-btn">Back</button>
+        </div>
+    </div>
+
+    <!-- ===== STORY CINEMATIC ===== -->
+    <div id="story-cinematic" class="hidden">
+        <div id="cinematic-scene" class="cinematic-scene">
+            <p id="cinematic-text"></p>
+        </div>
+        <button id="btn-cinematic-skip" class="menu-btn">Skip</button>
+    </div>
+
+    <!-- ===== UNLOCK MODAL ===== -->
+    <div id="unlock-modal" class="hidden">
+        <div id="unlock-content">
+            <canvas id="unlock-canvas" width="200" height="200"></canvas>
+            <h2 id="unlock-title"></h2>
+            <div id="unlock-details"></div>
+            <button id="btn-unlock-close" class="menu-btn">Got it!</button>
+        </div>
+    </div>
+
+    <!-- ===== SETTINGS PANEL ===== -->
+    <div id="settings-panel" class="hidden">
+        <h2>Settings</h2>
+        <div id="settings-content">
+            <div class="setting-section-title">Display</div>
+            <div class="setting-row">
+                <label>Camera Speed (WASD):</label>
+                <input type="range" id="setting-cam-speed" min="1" max="20" value="8">
+                <span id="setting-cam-speed-val">8</span>
+            </div>
+            <div class="setting-row">
+                <label>Scroll Zoom:</label>
+                <input type="range" id="setting-zoom-speed" min="1" max="20" value="5">
+                <span id="setting-zoom-speed-val">5</span>
+            </div>
+            <div class="setting-row">
+                <label>Grid Size:</label>
+                <input type="range" id="setting-grid-size" min="20" max="60" value="40">
+                <span id="setting-grid-size-val">40</span>
+            </div>
+            <div class="setting-row">
+                <label>Show Grid:</label>
+                <input type="checkbox" id="setting-show-grid" checked>
+            </div>
+            <div class="setting-row">
+                <label>Show Particles:</label>
+                <input type="checkbox" id="setting-show-particles" checked>
+            </div>
+            <div class="setting-row">
+                <label>Machine Energy:</label>
+                <input type="checkbox" id="setting-energy-system" checked>
+            </div>
+            <div class="setting-row">
+                <label>Building Details (V):</label>
+                <input type="checkbox" id="setting-show-details">
+            </div>
+
+            <div class="setting-section-title">Sound</div>
+            <div class="setting-row">
+                <label>Enable Sound:</label>
+                <input type="checkbox" id="setting-sound-enabled" checked>
+            </div>
+            <div class="setting-row">
+                <label>Background Ambience:</label>
+                <input type="range" id="setting-bg-volume" min="0" max="10" value="4">
+                <span id="setting-bg-volume-val">4</span>
+            </div>
+
+            <div class="setting-section-title" style="margin-top:16px;">Key Bindings</div>
+            <div class="setting-row">
+                <label>Move Up:</label>
+                <button class="keybind-btn" data-key="moveUp" id="keybind-moveUp">W</button>
+            </div>
+            <div class="setting-row">
+                <label>Move Left:</label>
+                <button class="keybind-btn" data-key="moveLeft" id="keybind-moveLeft">A</button>
+            </div>
+            <div class="setting-row">
+                <label>Move Down:</label>
+                <button class="keybind-btn" data-key="moveDown" id="keybind-moveDown">S</button>
+            </div>
+            <div class="setting-row">
+                <label>Move Right:</label>
+                <button class="keybind-btn" data-key="moveRight" id="keybind-moveRight">D</button>
+            </div>
+            <div class="setting-row">
+                <label>Rotate:</label>
+                <button class="keybind-btn" data-key="rotate" id="keybind-rotate">R</button>
+            </div>
+            <div class="setting-row">
+                <label>Toggle Machine:</label>
+                <button class="keybind-btn" data-key="toggle" id="keybind-toggle">E</button>
+            </div>
+        </div>
+        <button id="btn-settings-back" class="menu-btn">Back</button>
+    </div>
+
+    <!-- ===== GAME SCREEN ===== -->
+    <div id="game-screen" class="hidden">
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="bar-toggle" id="sidebar-toggle" title="Toggle sidebar">«</div>
+            <!-- Factory List -->
+            <div id="factory-section">
+                <div id="sidebar-header">
+                    <h1>Factory</h1>
+                    <button id="new-factory-btn" title="Create new factory">+</button>
+                </div>
+                <div id="factory-list"></div>
+                <div id="factory-actions">
+                    <button id="delete-factory-btn">Delete Factory</button>
+                </div>
+            </div>
+
+            <!-- Stage Display -->
+            <div id="stage-display"></div>
+
+            <!-- Building Palette (3 categories) -->
+            <div id="palette">
+                <h2>Buildings</h2>
+                <div id="palette-tabs">
+                    <button class="palette-tab active" data-tab="extraction">Extract</button>
+                    <button class="palette-tab" data-tab="processing">Process</button>
+                    <button class="palette-tab" data-tab="manufacturing">Manufacture</button>
+                </div>
+                <div id="palette-items"></div>
+                <div id="palette-info">
+                    <p id="building-name">Select a building</p>
+                    <p id="building-desc"></p>
+                    <p id="building-energy"></p>
+                </div>
+            </div>
+
+            <!-- Energy Panel -->
+            <div id="energy-panel">
+                <h2>Energy</h2>
+                <div id="energy-display"></div>
+            </div>
+
+            <!-- Back to Menu -->
+            <button id="btn-back-menu" style="margin: 8px;">Back to Menu</button>
+        </div>
+
+        <!-- Game Canvas -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- Tooltip -->
+        <div id="tooltip"></div>
+
+        <!-- Energy Warning -->
+        <div id="energy-warning" class="hidden">⚠ LOW ENERGY — Build a furnace or reduce consumption</div>
+
+        <!-- Right Resource Bar -->
+        <div id="resource-bar" class="collapsible-bar-right">
+            <div class="bar-toggle" id="resources-toggle" title="Toggle resources">»</div>
+            <div class="bar-content" id="resources-content"></div>
+            <div class="bar-content" id="production-content" style="margin-top: 8px; border-top: 1px solid #3a2a1a; padding-top: 4px;"></div>
+        </div>
+
+        <!-- Right Toolbar (below resource bar) -->
+        <div id="right-toolbar" class="collapsible-bar-right">
+            <div class="bar-toggle" id="toolbar-toggle" title="Toggle toolbar">»</div>
+            <div class="bar-content" id="toolbar-content">
+                <div class="tool-btn" data-mode="build" title="Build (1)">
+                    <span class="tb-key">1</span>
+                    <span class="tb-label">Build</span>
+                </div>
+                <div class="tool-btn" data-mode="delete" title="Delete (2)">
+                    <span class="tb-key">2</span>
+                    <span class="tb-label">Delete</span>
+                </div>
+                <div class="tool-btn" data-mode="inspect" title="Inspect (3)">
+                    <span class="tb-key">3</span>
+                    <span class="tb-label">Inspect</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Hint -->
+
+        <!-- Version Label -->
+        <div id="version-label"></div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="pause-overlay" class="hidden">
+        <div id="pause-content">
+            <h2>GAME PAUSED</h2>
+            <div id="pause-buttons">
+                <button id="btn-resume" class="pause-btn">Resume</button>
+                <button id="btn-save-world" class="pause-btn">Save World</button>
+                <button id="btn-pause-settings" class="pause-btn">Settings</button>
+                <button id="btn-quit-menu" class="pause-btn">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inspect Modal -->
+    <div id="inspect-modal" class="hidden">
+        <div id="inspect-content">
+            <h2 id="inspect-title"></h2>
+            <div id="inspect-details"></div>
+            <button id="btn-close-inspect">Close</button>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" class="hidden">
+        <div id="tutorial-content">
+            <div id="tutorial-scene">
+                <canvas id="tutorial-angel" width="120" height="120"></canvas>
+                <div id="tutorial-bubble">
+                    <div id="tutorial-title"></div>
+                    <div id="tutorial-body"></div>
+                </div>
+            </div>
+            <div id="tutorial-nav">
+                <button id="tutorial-prev">Previous</button>
+                <span id="tutorial-page-num"></span>
+                <button id="tutorial-next">Next</button>
+                <button id="tutorial-skip" style="color:#c03030;">Skip Tutorial</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/textures.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/buildings.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

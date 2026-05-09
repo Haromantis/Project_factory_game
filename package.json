@@ -1,0 +1,50 @@
+{
+  "name": "blood-factory",
+  "version": "1.0.0",
+  "description": "Blood Factory — From Cell to Soul",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager . \"Blood Factory\" --platform=win32 --arch=x64 --out=dist --overwrite",
+    "dist": "electron-packager . \"Blood Factory\" --platform=win32 --arch=x64 --out=dist --overwrite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "asar": "^3.2.0",
+    "electron": "^42.0.0",
+    "electron-builder": "^26.8.1",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.bloodfactory.game",
+    "productName": "Blood Factory",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "preload.js",
+      "VERSION",
+      "css/**/*",
+      "js/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

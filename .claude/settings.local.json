@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item *)",
+      "PowerShell(start \"D:\\\\Hackathon\\\\index.html\")",
+      "PowerShell(Start-Process \"http://localhost:8080\")",
+      "PowerShell(python -m http.server 8080 --directory \"D:\\\\Hackathon\")",
+      "PowerShell(node -c D:\\\\Hackathon\\\\js\\\\ui.js; node -c D:\\\\Hackathon\\\\js\\\\state.js)",
+      "PowerShell(node -c D:\\\\Hackathon\\\\js\\\\ui.js; node -c D:\\\\Hackathon\\\\js\\\\state.js; node -c D:\\\\Hackathon\\\\js\\\\input.js)",
+      "PowerShell(Start-Process \"D:\\\\my_folder\\\\Hackathon\\\\index.html\")",
+      "PowerShell(Start-Process \"$env:USERPROFILE\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" -ArgumentList \"`\"$PWD\\\\index.html`\"\")",
+      "PowerShell(Start-Process \"$PWD\\\\index.html\")",
+      "Bash(python -m http.server 8080)",
+      "Bash(node -c js/state.js)",
+      "Bash(node -c js/ui.js)",
+      "Bash(node -c js/render.js)",
+      "Bash(node -c js/input.js)",
+      "Bash(npm install *)",
+      "Bash(npx electron *)",
+      "Bash(npm start *)",
+      "Bash(npx electron-builder *)",
+      "Bash(\"./Blood Factory.exe\")",
+      "Bash(tasklist)",
+      "Bash(taskkill //F //IM \"Blood Factory.exe\")",
+      "Bash(taskkill //F //IM \"electron.exe\")",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(rm -rf dist/)",
+      "Bash(CSC_IDENTITY_AUTO_DISCOVERY=false ELECTRON_BUILDER_SIGN_CREATOR=none npx electron-builder --win --dir)",
+      "Bash(npx electron-packager *)",
+      "Bash(timeout 5 \"./Blood Factory.exe\")",
+      "Bash(echo \"EXIT: $?\")"
+    ]
+  }
+}
