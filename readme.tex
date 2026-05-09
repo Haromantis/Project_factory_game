@@ -1,9 +1,41 @@
-claude --resume f42bfde8-4a24-4df3-93fb-0fe85a9716fa
+this is a firt version of the game
 
-claude --resume e68ddef0-50a9-493e-bdf6-98871160d0e1
+now in the game we have..
+ v.0.0.1 (pre-beta-test)
 
-claude --resume e68ddef0-50a9-493e-bdf6-98871160d0e1
-
-claude --resume ba14090a-cc9a-41fd-8f6c-68ff8a3e97e3
-
-claude --resume ba14090a-cc9a-41fd-8f6c-68ff8a3e97e3
+  - Main Menu — Always shows on startup; "Load World" button is disabled until at least one save exists
+  - World Management — Create, load, delete, import, export worlds. Saves are stored as real JSON files on disk
+  (persistent across sessions)
+  - Factory System — Create, delete, switch between, and rename multiple factories
+  - Building Placement — Place, delete, rotate (R key), toggle on/off (E key) 15 building types on a grid
+  - Building Categories (3 tabs) — Extraction, Processing, Manufacturing
+  - Connection System — Shift+Click source building, then Shift+Click target to link them. Resources flow through
+   connections
+  - Production Pipeline — Resources flow: producer → conveyor → consumer/storage, with real-time progress bars
+  - Resource Types (9) — Biomass, Blood Algae, Carbon, Enzyme, Polymer, Biofuel, Protein, Bio Component, Bio
+  Organ
+  - Energy System — Toggleable. Furnaces generate energy, machines consume it. Warning shown when below 30%
+  - Development Stages (6) — First Cell → Embryo → Neural Tube → Heartbeat → Organogenesis → Birth. Requires
+  production cycles + time + stored resources to advance
+  - Stage Unlock System — Buildings unlock progressively per stage. Shows cinematic + modal listing newly
+  unlocked machines
+  - Cinematic System — Narrated story scenes per stage with auto-advance and skip button
+  - Tutorial — 5-page guided tutorial with angel portrait, covers basics, connections, energy, and production
+  chain
+  - Particle System — Smoke from furnaces, sparks from machines, celebration particles on stage advance
+  - Audio System — Procedural sound effects (place, delete, connect, produce, advance, tutorial chime).
+  Background ambient drone hum
+  - Camera Controls — WASD to pan, scroll to zoom. Speed configurable in settings
+  - Right Toolbar — Build / Delete / Inspect tool modes (hotkeys 1 / 2 / 3)
+  - Collapsible UI Panels — Sidebar, right resource bar, and right toolbar can each be toggled collapsed
+  - Resource Display — Dual display: bottom bar (supply vs demand) and sidebar (per-building totals)
+  - Production Stats — Active building count, total production history per resource type
+  - Storage System (Blood Sac) — Stores up to 100 units. Can filter which resources to push to output. Receives
+  from inputs, pushes to outputs
+  - Smart Conveyor — Filterable resource transport. Select which resource types are allowed through
+  - Settings Panel — Camera speed, zoom speed, grid size, grid toggle, particles toggle, energy system toggle,
+  sound volume, key binding remapper
+  - Save System — Auto-save every 30 seconds. File-based JSON saves in Electron (persistent on disk).
+  localStorage fallback for browser mode
+  - Version Label — Reads VERSION file, displays v.0.0.1 (pre-beta-test) faded in bottom-right corner
+  - Quit to Desktop — Saves game then closes the window from the main menu
